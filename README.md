@@ -226,7 +226,3 @@ All endpoints require authentication.
 ## 📄 License
 
 This project is open-source and available under the [MIT License](LICENSE).
-
----
-
-⭐ **If you like this project, give it a star!** ⭐
