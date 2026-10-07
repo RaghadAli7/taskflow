@@ -214,6 +214,41 @@ All endpoints require authentication.
     │   ├── web.php
     │   └── auth.php
     └── README.md
+    
+    
+## 📸 Screenshots
+
+### Welcome Page
+
+![Welcome Page](./screenshots/welcome.png)
+
+### Dashboard
+
+![Dashboard](./screenshots/dashboard.png)
+
+### Tasks List
+
+![Tasks List](./screenshots/tasks.png)
+
+### Create New Task
+
+![Create Task](./screenshots/create-task.png)
+
+### Edit Task
+
+![Edit Task](./screenshots/edit-task.png)
+
+### Categories Management
+
+![Categories](./screenshots/categories.png)
+
+### Login
+
+![Login](./screenshots/login.png)
+
+### Register
+
+![Register](./screenshots/register.png)
 
 ## 👤 Author
 
