@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Head, Link, usePage } from '@inertiajs/react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import toast from 'react-hot-toast';
 
 export default function Edit() {
     const { taskId } = usePage().props;
@@ -35,18 +36,22 @@ export default function Edit() {
     };
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
-        setIsSubmitting(true);
-        try {
-            await axios.put(`/api/tasks/${taskId}`, form);
+    e.preventDefault();
+    setIsSubmitting(true);
+    try {
+        await axios.put(`/api/tasks/${taskId}`, form);
+        toast.success('Task updated successfully! ✨');
+        setTimeout(() => {
             window.location.href = '/tasks';
-        } catch (error) {
-            console.error(error);
-            alert('An error occurred while updating the task');
-        } finally {
-            setIsSubmitting(false);
-        }
-    };
+        }, 500);
+    } catch (error) {
+        console.error(error.response?.data);
+        const message = error.response?.data?.message || 'Failed to update task';
+        toast.error(message);
+    } finally {
+        setIsSubmitting(false);
+    }
+};
 
     if (loading) {
         return (

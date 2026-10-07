@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Head, Link } from '@inertiajs/react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import toast from 'react-hot-toast';
 
 export default function Create() {
     const [form, setForm] = useState({
@@ -25,19 +26,22 @@ export default function Create() {
     };
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
-        setIsSubmitting(true);
-        try {
-            await axios.post('/api/tasks', form);
+    e.preventDefault();
+    setIsSubmitting(true);
+    try {
+        await axios.post('/api/tasks', form);
+        toast.success('Task created successfully! 🎉');
+        setTimeout(() => {
             window.location.href = '/tasks';
-        } catch (error) {
-            console.error(error);
-            alert('An error occurred while creating the task');
-        } finally {
-            setIsSubmitting(false);
-        }
-    };
-
+        }, 500);
+    } catch (error) {
+        console.error(error.response?.data);
+        const message = error.response?.data?.message || 'Failed to create task';
+        toast.error(message);
+    } finally {
+        setIsSubmitting(false);
+    }
+};
     return (
         <AuthenticatedLayout>
             <Head title="Create Task" />

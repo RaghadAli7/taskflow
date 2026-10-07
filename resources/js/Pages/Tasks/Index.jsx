@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Head, usePage } from '@inertiajs/react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import toast from 'react-hot-toast';
 
 export default function Index() {
     const [tasks, setTasks] = useState([]);
@@ -52,25 +53,32 @@ export default function Index() {
     }, [search, status, priority, categoryId, sortBy, sortOrder, page]);
 
     const handleDelete = async (id) => {
-        if (confirm('Are you sure you want to delete this task?')) {
-            try {
-                await axios.delete(`/api/tasks/${id}`);
-                fetchTasks();
-            } catch (error) {
-                console.error(error);
-                alert('An error occurred while deleting');
-            }
-        }
-    };
-
-    const handleToggleStatus = async (id) => {
+    if (confirm('Are you sure you want to delete this task?')) {
         try {
-            await axios.patch(`/api/tasks/${id}/toggle-status`);
+            await axios.delete(`/api/tasks/${id}`);
+            toast.success('Task deleted successfully');
             fetchTasks();
         } catch (error) {
             console.error(error);
+            toast.error('Failed to delete task');
         }
-    };
+    }
+};
+
+    const handleToggleStatus = async (id) => {
+    try {
+        const response = await axios.patch(`/api/tasks/${id}/toggle-status`);
+        if (response.data.status === 'completed') {
+            toast.success('Task marked as completed 🎉');
+        } else {
+            toast.success('Task marked as pending');
+        }
+        fetchTasks();
+    } catch (error) {
+        console.error(error);
+        toast.error('Failed to update task');
+    }
+};
 
     const getStatusStyle = (status) => {
         const styles = {

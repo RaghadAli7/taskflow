@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Head } from '@inertiajs/react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import toast from 'react-hot-toast';
 
 export default function Index() {
     const [categories, setCategories] = useState([]);
@@ -23,21 +24,24 @@ export default function Index() {
     }, []);
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            if (editing) {
-                await axios.put(`/api/categories/${editing}`, form);
-            } else {
-                await axios.post('/api/categories', form);
-            }
-            setForm({ name: '', color: '#3B82F6' });
-            setEditing(null);
-            setShowForm(false);
-            fetchCategories();
-        } catch (error) {
-            console.error(error);
+    e.preventDefault();
+    try {
+        if (editing) {
+            await axios.put(`/api/categories/${editing}`, form);
+            toast.success('Category updated successfully');
+        } else {
+            await axios.post('/api/categories', form);
+            toast.success('Category created successfully! 🎨');
         }
-    };
+        setForm({ name: '', color: '#3B82F6' });
+        setEditing(null);
+        setShowForm(false);
+        fetchCategories();
+    } catch (error) {
+        console.error(error);
+        toast.error('Failed to save category');
+    }
+};
 
     const handleEdit = (cat) => {
         setForm({ name: cat.name, color: cat.color });
@@ -45,12 +49,18 @@ export default function Index() {
         setShowForm(true);
     };
 
-    const handleDelete = async (id) => {
-        if (confirm('Are you sure you want to delete this category?')) {
+   const handleDelete = async (id) => {
+    if (confirm('Are you sure you want to delete this category?')) {
+        try {
             await axios.delete(`/api/categories/${id}`);
+            toast.success('Category deleted');
             fetchCategories();
+        } catch (error) {
+            console.error(error);
+            toast.error('Failed to delete category');
         }
-    };
+    }
+};
 
     const colors = [
         '#3B82F6', '#EF4444', '#10B981', '#F59E0B',
