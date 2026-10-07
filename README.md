@@ -1,58 +1,232 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# ✅ TaskFlow
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A modern, full-stack Task Management application built with **Laravel 11**, **React 18**, and **Inertia.js**. Designed with a professional dark UI (Navy + Amber) for productivity-focused users.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 📋 Table of Contents
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- [Features](#-features)
+- [Tech Stack](#-tech-stack)
+- [Installation](#-installation)
+- [API Endpoints](#-api-endpoints)
+- [Database Schema](#-database-schema)
+- [Project Structure](#-project-structure)
+- [Author](#-author)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## ✨ Features
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Core Features
+- 🔐 **Authentication** — Register, Login, Logout (Laravel Breeze)
+- 📝 **Full CRUD** for Tasks — Create, Read, Update, Delete
+- 📁 **Categories** — Organize tasks with color-coded categories
+- 🎯 **Priority Levels** — Low, Medium, High
+- 📊 **Status Tracking** — Pending, In Progress, Completed
+- 📅 **Due Dates** — Set deadlines with overdue detection
+- ✅ **Quick Toggle** — Mark tasks as complete with one click
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Advanced Features
+- 🔍 **Search** — Search tasks by title or description
+- 🎛️ **Advanced Filtering** — Filter by status, priority, and category
+- 🔀 **Sorting** — Sort by date, due date, or priority
+- 📄 **Pagination** — Efficient handling of large task lists
+- 📈 **Dashboard Statistics** — Real-time overview (total, pending, in progress, completed, overdue)
+- 🎨 **Professional UI** — Navy + Amber color scheme, responsive design
+- 🔒 **Secure API** — Protected routes with authentication middleware
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+---
 
-## Agentic Development
+## 🛠 Tech Stack
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+### Backend
+- **Laravel 11** — PHP Framework
+- **MySQL** — Database
+- **Laravel Sanctum** — API Authentication (session-based)
+- **Eloquent ORM** — Database interactions
 
-```bash
-composer require laravel/boost --dev
+### Frontend
+- **React 18** — UI Library
+- **Inertia.js** — SPA without API boilerplate
+- **Tailwind CSS** — Utility-first styling
+- **Vite** — Fast build tool
+- **Axios** — HTTP client
 
-php artisan boost:install
-```
+## 🚀 Installation
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+### Prerequisites
+- PHP >= 8.2
+- Composer
+- Node.js >= 18
+- MySQL
+- Git
 
-## Contributing
+### Step 1: Clone the repository
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+    git clone https://github.com/RaghadAli7/taskflow.git
+    cd taskflow
 
-## Code of Conduct
+### Step 2: Install PHP dependencies
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+    composer install
 
-## Security Vulnerabilities
+### Step 3: Install Node dependencies
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+    npm install
 
-## License
+### Step 4: Configure environment
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+    cp .env.example .env
+    php artisan key:generate
+
+Edit `.env` and set your database credentials:
+
+    DB_CONNECTION=mysql
+    DB_HOST=127.0.0.1
+    DB_PORT=3306
+    DB_DATABASE=taskflow
+    DB_USERNAME=root
+    DB_PASSWORD=
+
+### Step 5: Create database
+Create a MySQL database named `taskflow` (via phpMyAdmin or CLI).
+
+### Step 6: Run migrations
+
+    php artisan migrate
+
+### Step 7: Start the development servers
+
+**Terminal 1 — Vite:**
+
+    npm run dev
+
+**Terminal 2 — Laravel:**
+
+    php artisan serve
+
+### Step 8: Open in browser
+
+    http://127.0.0.1:8000
+
+Register a new account and start managing your tasks! 🎉
+
+## 🔌 API Endpoints
+
+All endpoints require authentication.
+
+### Categories
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/categories` | List all categories |
+| POST | `/api/categories` | Create a new category |
+| PUT | `/api/categories/{id}` | Update a category |
+| DELETE | `/api/categories/{id}` | Delete a category |
+
+### Tasks
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/tasks` | List tasks (with filters) |
+| POST | `/api/tasks` | Create a new task |
+| GET | `/api/tasks/{id}` | Get task details |
+| PUT | `/api/tasks/{id}` | Update a task |
+| DELETE | `/api/tasks/{id}` | Delete a task |
+| PATCH | `/api/tasks/{id}/toggle-status` | Toggle task status |
+
+### Statistics
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/stats` | Get dashboard statistics |
+
+## 🗄 Database Schema
+
+### `users`
+
+| Column | Type | Notes |
+|--------|------|-------|
+| id | BIGINT | Primary key |
+| name | VARCHAR | |
+| email | VARCHAR | Unique |
+| password | VARCHAR | Hashed |
+| timestamps | | |
+
+### `categories`
+
+| Column | Type | Notes |
+|--------|------|-------|
+| id | BIGINT | Primary key |
+| user_id | BIGINT | FK → users |
+| name | VARCHAR | |
+| color | VARCHAR | HEX color |
+| timestamps | | |
+
+### `tasks`
+
+| Column | Type | Notes |
+|--------|------|-------|
+| id | BIGINT | Primary key |
+| user_id | BIGINT | FK → users |
+| category_id | BIGINT | FK → categories (nullable) |
+| title | VARCHAR | |
+| description | TEXT | Nullable |
+| status | ENUM | pending, in_progress, completed |
+| priority | ENUM | low, medium, high |
+| due_date | DATE | Nullable |
+| completed_at | TIMESTAMP | Nullable |
+| timestamps | | |
+
+---
+
+## 📁 Project Structure
+
+    taskflow/
+    ├── app/
+    │   ├── Http/
+    │   │   └── Controllers/
+    │   │       ├── Api/
+    │   │       │   ├── CategoryController.php
+    │   │       │   └── TaskController.php
+    │   │       └── ProfileController.php
+    │   └── Models/
+    │       ├── Task.php
+    │       ├── Category.php
+    │       └── User.php
+    ├── database/
+    │   └── migrations/
+    ├── resources/
+    │   └── js/
+    │       ├── Layouts/
+    │       │   └── AuthenticatedLayout.jsx
+    │       └── Pages/
+    │           ├── Dashboard.jsx
+    │           ├── Welcome.jsx
+    │           ├── Tasks/
+    │           │   ├── Index.jsx
+    │           │   ├── Create.jsx
+    │           │   └── Edit.jsx
+    │           └── Categories/
+    │               └── Index.jsx
+    ├── routes/
+    │   ├── web.php
+    │   └── auth.php
+    └── README.md
+
+## 👤 Author
+
+**Raghad Ali**
+- GitHub: [@RaghadAli7](https://github.com/RaghadAli7)
+- Email: raghad77aliali@gmail.com
+
+---
+
+## 📄 License
+
+This project is open-source and available under the [MIT License](LICENSE).
+
+---
+
+⭐ **If you like this project, give it a star!** ⭐
