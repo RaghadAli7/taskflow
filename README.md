@@ -216,7 +216,7 @@ All endpoints require authentication.
     └── README.md
     
     
-## 📸 Screenshots
+## 📸 screenshots
 
 ### Welcome Page
 
